@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const API_URL = `http://localhost:5005/api/events/${eventId}/comments`;
+const { eventId } = useParams;
 
 const Comments = ({ eventId }) => {
 	const [comments, setComments] = useState([]);
-	const { eventId } = useParams;
 
 	const fetchComments = async () => {
 		try {

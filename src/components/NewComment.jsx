@@ -12,11 +12,11 @@ const NewComment = () => {
 		const newComment = { text: payload.comment };
 		console.log(newComment);
 		try {
-			const response = await axios.post(API_URL, { comment });
+			const response = await axios.post(API_URL, { newComment });
 			console.log(response);
 			if (response.status === 201) {
 				console.log("Signup response:", response);
-				navigate(`/students/events/${event.id}`);
+				navigate(`/events/${event._id}`);
 			}
 		} catch (error) {
 			console.log("Error on handleComment: ", error);
