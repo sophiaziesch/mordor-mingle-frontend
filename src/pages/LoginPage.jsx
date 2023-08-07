@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/Auth.context";
 
 const API_URL = "http://localhost:5005/api/auth/login";
 
@@ -12,14 +13,14 @@ const LoginPage = () => {
 	const navigate = useNavigate();
 
 	const handleLogin = async (event) => {
-		event.prevenDefault();
+		event.preventDefault();
 		try {
 			const { data } = await axios.post(API_URL, { username, password });
 			console.log("Login response: ", data);
 			localStorage.setItem("authToken", data.token);
 			await authenticateUser();
 			/* TODO: change to proper redirection */
-			navigate("/");
+			navigate("/events");
 		} catch (error) {
 			console.log("Error on handleLogin: ", error);
 			setErrorMessage(error.response.data.errorMessage);
@@ -48,6 +49,7 @@ const LoginPage = () => {
 						type="password"
 					/>
 				</label>
+				<button type="submit">Login</button>
 			</form>
 		</>
 	);
