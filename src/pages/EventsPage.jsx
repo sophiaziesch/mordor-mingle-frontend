@@ -7,7 +7,7 @@ const EventsPage = () => {
   const fetchEvents = async () => {
     try {
       const response = await axios.get("http://localhost:5005/api/events");
-      //   console.log(response.data);
+      //console.log(response.data);
 
       const parsedEvents = await response.data;
       setEvents(parsedEvents);

@@ -1,20 +1,34 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EventDetailsPage = () => {
   const { eventId } = useParams();
-  const [event, setEvent] = useState("");
+  const [event, setEvent] = useState([]);
+  const navigate = useNavigate();
 
-  console.log("here is the id", eventId);
   const fetchOneEvent = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5005/api/events/${eventId}`
       );
       if (response.status === 200) {
-        const parsedEvent = await response.data();
+        const parsedEvent = await response.data;
         setEvent(parsedEvent);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5005/api/events/${eventId}`
+      );
+      if (response.status === 202) {
+        //Here we don't need any data because we are deleting an student, not using its data for anything. Instead, we navigate to the allStudents page
+        navigate("/events");
       }
     } catch (err) {
       console.log(err);
@@ -31,6 +45,9 @@ const EventDetailsPage = () => {
       <p>{event.title}</p>
       <p>{event.description}</p>
       <p>{event.location}</p>
+      <button type="button" onClick={handleDelete}>
+        Erase this event from the face of Middle Earth
+      </button>
     </>
   );
 };
