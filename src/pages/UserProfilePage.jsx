@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
+import { Image } from 'cloudinary-react';
 
 const UserProfilePage = () => {
     const { userId } = useParams()
@@ -23,9 +24,11 @@ const UserProfilePage = () => {
 
     return user ? (
         <div>
+            
+            <Image cloudName="dw2f2da86" publicId={user.profileImage} height="150" crop="thumb" />
+
             <h1>Welcome, {user.username}!</h1>
             
-            <h3>{user.profileImage}</h3>
             <h3>{user.email}</h3>
             <h3>{user.eventsCreated}</h3>
             <h3>{user.eventsLiked}</h3>
