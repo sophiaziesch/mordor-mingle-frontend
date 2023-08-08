@@ -32,7 +32,7 @@ const UserProfilePage = () => {
             <h1>Welcome, {user.username}!</h1>
             
             <h3>{user.email}</h3>
-            <h3>Events Created:</h3>
+            <h3>Events Liked:</h3>
             {user.eventsCreated && user.eventsCreated.length > 0 ? (
                 <ul>
                     {user.eventsCreated.map((event) => (
