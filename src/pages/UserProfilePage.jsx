@@ -11,7 +11,7 @@ const UserProfilePage = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:5005/api/auth/${userId}`)
+                const response = await axios.get(`http://localhost:5005/api/auth/${userId}?populate=eventsCreated`)
                 if (response.status === 200) {
                     setUser(response.data)
                 }
@@ -30,7 +30,19 @@ const UserProfilePage = () => {
             <h1>Welcome, {user.username}!</h1>
             
             <h3>{user.email}</h3>
-            <h3>{user.eventsCreated}</h3>
+            {user.eventsCreated && user.eventsCreated.length > 0 ? (
+            <ul>
+                {user.eventsCreated.map((event) => (
+                    <li key={event._id}>
+                        <h4>{event.title}</h4>
+                        <p>{event.location}</p>
+                        <p>{event.date}</p>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <p>No events created yet.</p>
+        )}
             <h3>{user.eventsLiked}</h3>
             <h3>{user.race}</h3>
 

@@ -17,7 +17,6 @@ const UpdateProfilePage = () => {
     const updatedUser = {
       username: payload.username,
       email: payload.email,
-      password: payload.password,
       race: payload.race,
       profileImage: payload.profileImage
 

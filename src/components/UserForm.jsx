@@ -5,7 +5,6 @@ const UserForm = ({ onSubmit, user }) => {
   const [username, setUsername] = useState(user?.username || '')
   const [email, setEmail] = useState((typeof user !== 'undefined' && user.email) || '')
   /* const [priorXp, setPriorXp] = useState(student?.priorXp.join(' ') || '') */
-  const [password, setPassword] = useState('')
   const [selectedRace, setSelectedRace] = useState('')
   const [race, setRace] = useState([])
   const [profileImage, setProfileImage] = useState(user?.profileImage || 'https://res.cloudinary.com/dw2f2da86/image/upload/v1691446459/Screenshot_2023-08-08_at_00.13.58_vuv4vy.png');
@@ -13,7 +12,7 @@ const UserForm = ({ onSubmit, user }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    onSubmit({ username, email, password, race: selectedRace, profileImage })
+    onSubmit({ username, email, race: selectedRace, profileImage })
   }
 
   const handleImageUpload = async file => {
@@ -59,7 +58,7 @@ const UserForm = ({ onSubmit, user }) => {
           onChange={e => handleImageUpload(e.target.files[0])}
         />
         <CloudinaryContext cloudName="dw2f2da86">
-          <Image publicId={profileImage} width="150" height="150" crop="thumb" />
+          <Image publicId={profileImage} height="150" crop="thumb" />
         </CloudinaryContext>
         <input
             type='text'
@@ -77,14 +76,6 @@ const UserForm = ({ onSubmit, user }) => {
             setEmail(e.target.value)
             }}
         />
-        <input
-        type="password"
-        value={password}
-        placeholder="Password"
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
         <select
           value={selectedRace}
           onChange={(e) => setSelectedRace(e.target.value)}
