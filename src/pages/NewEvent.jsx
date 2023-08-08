@@ -10,14 +10,14 @@ const NewEvent = () => {
 
 	const [selectedLocation, setSelectedLocation] = useState("");
 	const [locationOptions, setLocationOptions] = useState([]);
-	const [username, setUsername] = useState(""); // Add userName state
+	const [userId, setUserId] = useState(""); // Add userName state
 
 	const getUserId = async (token) => {
 		const { data } = await axios.get("http://localhost:5005/api/getUser", {
 			headers: { authorization: `Bearer ${token}` },
 		});
 		console.log(data);
-		setUsername(data);
+		setUserId(data);
 	};
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const NewEvent = () => {
 
 		const accessToken = localStorage.getItem("authToken");
 		if (accessToken) {
-			console.log(accessToken);
+			//console.log(accessToken);
 			getUserId(accessToken);
 		}
 
@@ -48,10 +48,11 @@ const NewEvent = () => {
 		try {
 			event.preventDefault();
 			const newEvent = {
-				title: title,
+				title,
 				description,
 				date,
 				location: selectedLocation,
+				//userId,
 			};
 
 			const response = await fetch("http://localhost:5005/api/events", {
@@ -61,8 +62,9 @@ const NewEvent = () => {
 				},
 				body: JSON.stringify(newEvent),
 			});
-			console.log("Signup response:", response);
+			console.log("New event response:", response);
 			const parsed = await response.json();
+			console.log(parsed.data);
 			navigate(`/events/${parsed._id}`);
 
 			//We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server

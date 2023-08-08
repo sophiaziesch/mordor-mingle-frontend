@@ -20,7 +20,7 @@ const NewComment = () => {
 					headers: { authorization: `Bearer ${tokenStored}` },
 				}
 			);
-			//console.log(response);
+			console.log(response);
 			if (response.status === 201) {
 				//console.log("NewComment response:", response);
 				navigate(`/events/${event._id}`);
