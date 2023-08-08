@@ -1,25 +1,32 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const API_URL = `http://localhost:5005/api/events/${eventId}/comments`;
+import { useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config/config.index";
 
 const NewComment = () => {
-	const [comment, setComment] = useState("");
+	const [commentText, setCommentText] = useState("");
+	const { eventId } = useParams();
 	const navigate = useNavigate();
+	const tokenStored = localStorage.getItem("authToken");
 
 	const handleNewComment = async (event) => {
-		const newComment = { text: payload.comment };
-		console.log(newComment);
 		try {
-			const response = await axios.post(API_URL, { newComment });
-			console.log(response);
+			const response = await axios.post(
+				`${API_URL}/api/events/${eventId}`,
+				{
+					text: commentText,
+				},
+				{
+					headers: { authorization: `Bearer ${tokenStored}` },
+				}
+			);
+			//console.log(response);
 			if (response.status === 201) {
-				console.log("Signup response:", response);
+				//console.log("NewComment response:", response);
 				navigate(`/events/${event._id}`);
 			}
 		} catch (error) {
-			console.log("Error on handleComment: ", error);
+			//console.log("Error on handleComment: ", error);
 		}
 	};
 
@@ -27,9 +34,9 @@ const NewComment = () => {
 		<div>
 			<form onSubmit={handleNewComment}>
 				<textarea
-					value={comment}
+					value={commentText}
 					onChange={(event) => {
-						setComment(event.target.value);
+						setCommentText(event.target.value);
 					}}
 					name="comment"
 					placeholder="Add comment..."

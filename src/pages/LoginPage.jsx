@@ -2,8 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth.context";
-
-const API_URL = "http://localhost:5005/api/auth/login";
+import { API_URL } from "../config/config.index";
 
 const LoginPage = () => {
 	const [username, setUsername] = useState("");
@@ -15,7 +14,10 @@ const LoginPage = () => {
 	const handleLogin = async (event) => {
 		event.preventDefault();
 		try {
-			const { data } = await axios.post(API_URL, { username, password });
+			const { data } = await axios.post(`${API_URL}/api/auth/login`, {
+				username,
+				password,
+			});
 			console.log("Login response: ", data);
 			localStorage.setItem("authToken", data.token);
 			await authenticateUser();

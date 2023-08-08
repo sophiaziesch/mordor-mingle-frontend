@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = "http://localhost:5005/api/auth/signup";
+import { API_URL } from "../config/config.index";
 
 const SignupPage = () => {
 	/* States to control inputs */
@@ -15,7 +14,11 @@ const SignupPage = () => {
 		event.preventDefault();
 		/* Send signup information to backend */
 		try {
-			const response = await axios.post(API_URL, { username, email, password });
+			const response = await axios.post(`${API_URL}/api/auth/signup`, {
+				username,
+				email,
+				password,
+			});
 			if (response.status === 201) {
 				console.log("Signup response:", response);
 				navigate("/login");
