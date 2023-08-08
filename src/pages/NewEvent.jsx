@@ -10,14 +10,14 @@ const NewEvent = () => {
 
   const [selectedLocation, setSelectedLocation] = useState("");
   const [locationOptions, setLocationOptions] = useState([]);
-  const [username, setUsername] = useState(""); // Add userName state
+  const [userId, setUserId] = useState(""); // Add userName state
 
   const getUserId = async (token) => {
     const { data } = await axios.get("http://localhost:5005/api/getUser", {
       headers: { authorization: `Bearer ${token}` },
     });
     console.log(data);
-    setUsername(data);
+    setUserId(data);
   };
 
   useEffect(() => {
@@ -48,10 +48,11 @@ const NewEvent = () => {
     try {
       event.preventDefault();
       const newEvent = {
-        title: title,
+        title,
         description,
         date,
         location: selectedLocation,
+        //userId
       };
 
       const response = await fetch("http://localhost:5005/api/events", {

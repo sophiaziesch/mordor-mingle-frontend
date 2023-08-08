@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const EventDetailsPage = () => {
   const { eventId } = useParams();
@@ -48,8 +48,11 @@ const EventDetailsPage = () => {
       <button type="button" onClick={handleDelete}>
         Erase this event from the face of Middle Earth
       </button>
+
+      <Link to={`/events/${eventId}/update`}>
+        <button type="button">Update Event</button>
+      </Link>
     </>
   );
 };
-
 export default EventDetailsPage;
