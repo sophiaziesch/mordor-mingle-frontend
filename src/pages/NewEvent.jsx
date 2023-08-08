@@ -13,11 +13,11 @@ const NewEvent = () => {
 	const [userId, setUserId] = useState(""); // Add userName state
 
 	const getUserId = async (token) => {
-		const { data } = await axios.get("http://localhost:5005/api/getUser", {
+		const response = await axios.get("http://localhost:5005/api/getUser", {
 			headers: { authorization: `Bearer ${token}` },
 		});
-		console.log(data);
-		setUserId(data);
+		console.log("Response.data in getUserId", response.data.userId.userId);
+		setUserId(response.data.userId.userId);
 	};
 
 	useEffect(() => {
@@ -52,8 +52,9 @@ const NewEvent = () => {
 				description,
 				date,
 				location: selectedLocation,
-				//userId,
+				userId,
 			};
+			console.log("userId after handleSubmit: ", userId);
 
 			const response = await fetch("http://localhost:5005/api/events", {
 				method: "POST",

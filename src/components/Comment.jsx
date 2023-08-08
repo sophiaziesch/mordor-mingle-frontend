@@ -1,24 +1,25 @@
 import React from "react";
 import ProfileImage from "./ProfileImage";
 
-function Comment({ props }) {
+function Comment({ comment }) {
+	//console.log("Error on comment: ", comment);
 	return (
 		<div className="comment">
-			<ProfileImage image={props.userId.image} />
+			{/* <ProfileImage image={comment.userId.image} /> */}
 
 			<div className="comment-body">
 				<div className="comment-top">
 					<span className="user">
-						<span>{props.userId.name}</span>
+						{/* <span>{comment.userId.username}</span> */}
 					</span>
 
-					<span>{props.timestamp}</span>
+					<span>{comment.createdAt}</span>
 				</div>
 
-				<p>{props.text}</p>
+				<p>{comment.text}</p>
 			</div>
 
-			<i className="fas fa-ellipsis-h"></i>
+			{/* <i className="fas fa-ellipsis-h"></i> */}
 		</div>
 	);
 }
