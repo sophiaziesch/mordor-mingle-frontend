@@ -7,7 +7,10 @@ const UserForm = ({ onSubmit, user }) => {
   /* const [priorXp, setPriorXp] = useState(student?.priorXp.join(' ') || '') */
   const [selectedRace, setSelectedRace] = useState('')
   const [race, setRace] = useState([])
-  const [profileImage, setProfileImage] = useState(user?.profileImage || 'https://res.cloudinary.com/dw2f2da86/image/upload/v1691446459/Screenshot_2023-08-08_at_00.13.58_vuv4vy.png');
+  const [profileImage, setProfileImage] = useState(
+    user?.profileImage ||
+      `https://res.cloudinary.com/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload/v1691446459/Screenshot_2023-08-08_at_00.13.58_vuv4vy.png`
+  )
 
 
   const handleSubmit = event => {
@@ -15,19 +18,22 @@ const UserForm = ({ onSubmit, user }) => {
     onSubmit({ username, email, race: selectedRace, profileImage })
   }
 
-  const handleImageUpload = async file => {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('upload_preset', 'MordorMingle')
-
-    const response = await fetch(`https://api.cloudinary.com/v1_1/dw2f2da86/image/upload`, {
-      method: 'POST',
-      body: formData,
-    })
-
+  const handleImageUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+  
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+    
     const data = await response.json();
-    setProfileImage(data.secure_url);
-  }
+  setProfileImage(data.secure_url);
+}
 
   useEffect(() => {
     const raceOptions = [
@@ -55,9 +61,9 @@ const UserForm = ({ onSubmit, user }) => {
         <input
           type="file"
           accept="image/jpeg, image/png"
-          onChange={e => handleImageUpload(e.target.files[0])}
+          onChange={(e) => handleImageUpload(e.target.files[0])}
         />
-        <CloudinaryContext cloudName="dw2f2da86">
+        <CloudinaryContext cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}>
           <Image publicId={profileImage} height="150" crop="thumb" />
         </CloudinaryContext>
         <input
