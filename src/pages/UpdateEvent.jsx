@@ -8,7 +8,6 @@ const UpdateEvent = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [events, setEvents] = useState("");
 
   const [selectedLocation, setSelectedLocation] = useState("");
   const [locationOptions, setLocationOptions] = useState([]);
@@ -20,30 +19,42 @@ const UpdateEvent = () => {
       ); //I call my API to get all the students with the fetch
       if (response.status === 200) {
         const parsedEvents = await response.json(); //If the response is successfull then I get the info from response.json() --> from the back end
-        setEvents(parsedEvents); //Once I get the info from the back end I use it in my setStudents
+        setTitle(parsedEvents.title); //Once I get the info from the back end I use it in my
+        setDescription(parsedEvents.description);
+        setDate(parsedEvents.date);
+        setSelectedLocation(parsedEvents.selectedLocation);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleUpdateEvent = async ({ payload }) => {
+  const handleUpdateEvent = async (event) => {
+    event.preventDefault();
     const updatedEvent = {
-      selectedLocation: payload.selectedLocation,
-      title: payload.title,
-      description: payload.description,
-      date: payload.date,
+      selectedLocation,
+      title,
+      description,
+      date,
     };
+    console.log(updatedEvent);
 
-    const response = fetch(`http://localhost:5005/api/events/${eventId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedEvent),
-    });
-    const parsed = await response.json(); //We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server
-    navigate(`/events/${parsed._id}`);
+    try {
+      const response = await fetch(
+        `http://localhost:5005/api/events/update/${eventId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedEvent),
+        }
+      );
+      const parsed = await response.json(); //We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server
+      navigate(`/events/${parsed._id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +72,7 @@ const UpdateEvent = () => {
       "The Shire",
     ];
 
-    fetchEvents(setEvents);
+    fetchEvents();
     setLocationOptions(enumLocations);
   }, []);
 
