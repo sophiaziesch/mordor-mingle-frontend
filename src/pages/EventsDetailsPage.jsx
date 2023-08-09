@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Comments from "../components/Comments";
-import NewComment from "../components/NewComment";
 import { API_URL } from "../config/config.index";
 
 const EventDetailsPage = () => {
@@ -17,7 +16,7 @@ const EventDetailsPage = () => {
 			const response = await axios.get(`${API_URL}/api/events/${eventId}`);
 			if (response.status === 200) {
 				const parsedEvent = await response.data;
-				console.log(parsedEvent);
+				console.log("Output in fetchOneEvent: ", parsedEvent);
 				setEvent(parsedEvent);
 				setComments(parsedEvent.comments);
 				setIsLoading(false);
@@ -31,7 +30,6 @@ const EventDetailsPage = () => {
 		try {
 			const response = await axios.delete(`${API_URL}/api/events/${eventId}`);
 			if (response.status === 202) {
-				//Here we don't need any data because we are deleting an student, not using its data for anything. Instead, we navigate to the allStudents page
 				navigate("/events");
 			}
 		} catch (err) {
@@ -56,6 +54,7 @@ const EventDetailsPage = () => {
 						comments={comments}
 						setComments={setComments}
 						eventId={eventId}
+						// user={user}
 					/>
 					<button type="button" onClick={handleDelete}>
 						Erase this event from the face of Middle Earth

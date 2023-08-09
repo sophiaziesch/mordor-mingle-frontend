@@ -1,18 +1,18 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { API_URL } from "../config/config.index";
 
 const NewComment = ({ comments, setComments }) => {
+	/* Setting states, getting token from local machine */
 	const [commentText, setCommentText] = useState("");
-	// const [comments, setComments] = useState(comments);
 	const { eventId } = useParams();
-	const navigate = useNavigate();
 	const tokenStored = localStorage.getItem("authToken");
 
 	const handleNewComment = async (event) => {
 		event.preventDefault();
 		try {
+			/* Sending comment to backend including the user's token, to verify a logged in user for commenting */
 			const response = await axios.post(
 				`${API_URL}/api/events/${eventId}`,
 				{
@@ -22,15 +22,15 @@ const NewComment = ({ comments, setComments }) => {
 					headers: { authorization: `Bearer ${tokenStored}` },
 				}
 			);
-			console.log(response);
+			//console.log(response);
 			if (response.status === 201) {
+				/* making shallow copy of previous comments and adding newly created comment to comments array of event */
 				setComments([...comments, response.data]);
 				setCommentText("");
 				//console.log("NewComment response:", response);
-				// navigate(`/events/${event._id}`);
 			}
 		} catch (error) {
-			console.log("Error on handleComment: ", error);
+			console.log("Error on handleNewComment: ", error);
 		}
 	};
 

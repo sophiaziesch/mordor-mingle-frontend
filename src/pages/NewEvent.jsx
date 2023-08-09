@@ -16,7 +16,7 @@ const NewEvent = () => {
 		const response = await axios.get("http://localhost:5005/api/getUser", {
 			headers: { authorization: `Bearer ${token}` },
 		});
-		console.log("Response.data in getUserId", response.data.userId.userId);
+		//console.log("Response.data in getUserId", response.data.userId.userId);
 		setUserId(response.data.userId.userId);
 	};
 
@@ -54,7 +54,7 @@ const NewEvent = () => {
 				location: selectedLocation,
 				userId,
 			};
-			console.log("userId after handleSubmit: ", userId);
+			//console.log("userId after handleSubmit: ", userId);
 
 			const response = await fetch("http://localhost:5005/api/events", {
 				method: "POST",
@@ -63,9 +63,9 @@ const NewEvent = () => {
 				},
 				body: JSON.stringify(newEvent),
 			});
-			console.log("New event response:", response);
+			//console.log("New event response:", response);
 			const parsed = await response.json();
-			console.log(parsed.data);
+			console.log("Parsed data in handleSubmit new event: ", parsed.data);
 			navigate(`/events/${parsed._id}`);
 
 			//We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server

@@ -3,14 +3,15 @@ import ProfileImage from "./ProfileImage";
 
 function Comment({ comment }) {
 	//console.log("Error on comment: ", comment);
+	//console.log(comment);
 	return (
 		<div className="comment">
-			{/* <ProfileImage image={comment.userId.image} /> */}
+			<ProfileImage image={comment.user.image} />
 
 			<div className="comment-body">
 				<div className="comment-top">
 					<span className="user">
-						{/* <span>{comment.userId.username}</span> */}
+						<span>{comment.user.username}</span>
 					</span>
 
 					<span>{comment.createdAt}</span>
