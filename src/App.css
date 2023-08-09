@@ -8,23 +8,46 @@
 	border: 0;
 	font: inherit;
 	vertical-align: baseline;
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+<<<<<<< HEAD
 
 ol, ul {
+=======
+body {
+	line-height: 1;
+	font-size: 16px;
+	background-image: url("/src/assets/lava-bg.jpg");
+	background-size: cover;
+}
+ol,
+ul {
+>>>>>>> main
 	list-style: none;
 }
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
 	content: none;
 }
 table {
@@ -102,6 +125,7 @@ h4 {
 /* NAV STYLES */
 
 .navbar {
+<<<<<<< HEAD
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -233,25 +257,35 @@ h4 {
   width: 100vw;
   justify-content: space-between;
   padding: 0 100px;
+=======
+	background-color: red;
+	display: flex;
+	width: 100vw;
+	justify-content: space-between;
+	padding: 0 100px;
+>>>>>>> main
 }
 
 .logo {
-  width: 200px;
-  height: auto;
+	width: 200px;
+	height: auto;
 }
 
 .links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .links li {
-  margin: 1rem;
+	margin: 1rem;
+}
+<<<<<<< HEAD
+
 }
 
-}
 
 
 
-
+=======
+>>>>>>> main

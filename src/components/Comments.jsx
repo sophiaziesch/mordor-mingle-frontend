@@ -7,6 +7,7 @@ import NewComment from "./NewComment";
 
 const Comments = ({ comments, setComments }) => {
 	const { eventId } = useParams();
+	console.log(comments);
 	// const [comments, setComments] = useState([]);
 
 	// const fetchComments = async () => {
