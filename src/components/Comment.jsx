@@ -2,7 +2,8 @@ import ProfileImage from "./ProfileImage";
 
 function Comment({ comment }) {
   //console.log("Error on comment: ", comment);
-  //console.log(comment);
+  console.log(comment);
+  console.log(comment.userId.username);
   const originalDate = new Date(comment.createdAt);
 
   const options = { month: "long", day: "numeric", year: "numeric" };
@@ -10,8 +11,8 @@ function Comment({ comment }) {
 
   return (
     <div className="comment">
-      <ProfileImage image={comment.user.image} />
-      <h3>{comment.user.username}</h3>
+      <ProfileImage image={comment.userId.image} />
+      <h3>{comment.userId.username}</h3>
       <h4>{formattedDate}</h4>
       <p>{comment.text}</p>
     </div>

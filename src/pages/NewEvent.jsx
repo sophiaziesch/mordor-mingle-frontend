@@ -12,7 +12,6 @@ const NewEvent = () => {
   const [locationOptions, setLocationOptions] = useState([]);
   const [userId, setUserId] = useState(""); // Add userName state
 
-<<<<<<< HEAD
   const getUserId = async (token) => {
     const response = await axios.get("http://localhost:5005/api/getUser", {
       headers: { authorization: `Bearer ${token}` },
@@ -20,15 +19,6 @@ const NewEvent = () => {
     console.log("Response.data in getUserId", response.data.userId.userId);
     setUserId(response.data.userId.userId);
   };
-=======
-	const getUserId = async (token) => {
-		const response = await axios.get("http://localhost:5005/api/getUser", {
-			headers: { authorization: `Bearer ${token}` },
-		});
-		//console.log("Response.data in getUserId", response.data.userId.userId);
-		setUserId(response.data.userId.userId);
-	};
->>>>>>> main
 
   useEffect(() => {
     // Use the predefined enum values as the location options
@@ -54,7 +44,6 @@ const NewEvent = () => {
     setLocationOptions(enumLocations);
   }, []);
 
-<<<<<<< HEAD
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -78,31 +67,6 @@ const NewEvent = () => {
       const parsed = await response.json();
       console.log(parsed.data);
       navigate(`/events/${parsed._id}`);
-=======
-	const handleSubmit = async (event) => {
-		try {
-			event.preventDefault();
-			const newEvent = {
-				title,
-				description,
-				date,
-				location: selectedLocation,
-				userId,
-			};
-			//console.log("userId after handleSubmit: ", userId);
-
-			const response = await fetch("http://localhost:5005/api/events", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newEvent),
-			});
-			//console.log("New event response:", response);
-			const parsed = await response.json();
-			console.log("Parsed data in handleSubmit new event: ", parsed.data);
-			navigate(`/events/${parsed._id}`);
->>>>>>> main
 
       //We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server
     } catch (err) {
