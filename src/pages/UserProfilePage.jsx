@@ -30,7 +30,7 @@ const UserProfilePage = () => {
         }
     }
     fetchUser()
-  }, [userId, fetchedUser])
+  }, [])
 
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
