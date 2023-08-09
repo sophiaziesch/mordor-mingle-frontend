@@ -4,23 +4,13 @@ import ProfileImage from "./ProfileImage";
 function Comment({ comment }) {
 	//console.log("Error on comment: ", comment);
 	//console.log(comment);
+	const date = comment.createdAt.toString();
 	return (
 		<div className="comment">
 			<ProfileImage image={comment.user.image} />
-
-			<div className="comment-body">
-				<div className="comment-top">
-					<span className="user">
-						<span>{comment.user.username}</span>
-					</span>
-
-					<span>{comment.createdAt}</span>
-				</div>
-
-				<p>{comment.text}</p>
-			</div>
-
-			{/* <i className="fas fa-ellipsis-h"></i> */}
+			<h3>{comment.user.username}</h3>
+			<h4>{comment.createdAt.toString()}</h4>
+			<p>{comment.text}</p>
 		</div>
 	);
 }
