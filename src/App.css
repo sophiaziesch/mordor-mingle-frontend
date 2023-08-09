@@ -24,19 +24,8 @@ nav,
 section {
 	display: block;
 }
-<<<<<<< HEAD
 
 ol, ul {
-=======
-body {
-	line-height: 1;
-	font-size: 16px;
-	background-image: url("/src/assets/lava-bg.jpg");
-	background-size: cover;
-}
-ol,
-ul {
->>>>>>> main
 	list-style: none;
 }
 blockquote,
@@ -125,7 +114,6 @@ h4 {
 /* NAV STYLES */
 
 .navbar {
-<<<<<<< HEAD
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -257,13 +245,7 @@ h4 {
   width: 100vw;
   justify-content: space-between;
   padding: 0 100px;
-=======
-	background-color: red;
-	display: flex;
-	width: 100vw;
-	justify-content: space-between;
-	padding: 0 100px;
->>>>>>> main
+
 }
 
 .logo {
@@ -280,12 +262,11 @@ h4 {
 .links li {
 	margin: 1rem;
 }
-<<<<<<< HEAD
+
 
 }
 
 
 
 
-=======
->>>>>>> main
+
