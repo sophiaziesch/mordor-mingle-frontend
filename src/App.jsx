@@ -9,8 +9,13 @@ import UpdateProfilePage from "./pages/UpdateProfilePage";
 import { Link, Route, Routes } from "react-router-dom";
 import UpdateEvent from "./pages/UpdateEvent";
 import NewEvent from "./pages/NewEvent";
+import { useContext } from 'react'
+import { AuthContext } from "./contexts/Auth.context";
+
 
 function App() {
+  const { isLoggedIn, user } = useContext(AuthContext);
+
   return (
     <>
       <nav>
@@ -19,6 +24,8 @@ function App() {
           <Link to="/login">Login</Link>
           <Link to="/events">Events</Link>
           <Link to="/events/new">New Event</Link>
+          {isLoggedIn && <Link to={`/${user._id}`}>Profile</Link>}
+
         </ul>
       </nav>
 

@@ -13,14 +13,11 @@ const UpdateProfilePage = () => {
   }, [])
 
   const handleUpdateUser = async payload => {
-    /* const priorXpArray = payload.priorXp.split(' ') */
     const updatedUser = {
       username: payload.username,
       email: payload.email,
       race: payload.race,
       profileImage: payload.profileImage
-
-      /* priorXp: priorXpArray, */
     }
     const response = await sendUser (updatedUser, userId, 'PUT')
 
