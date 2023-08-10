@@ -4,6 +4,10 @@ Mordor Mingle is a web application that provides a platform for users to explore
 
 ![Mordor Mingle Screenshot](/src/assets/Logo-white.png)
 
+## Deployment Link
+
+https://mordor-mingle.netlify.app/
+
 ## Features
 
 - **Event Exploration:** Explore a wide range of events happening in Middle Earth.
@@ -12,7 +16,15 @@ Mordor Mingle is a web application that provides a platform for users to explore
 - **Event Comments:** Engage with other users by leaving comments on events.
 - **Event Details:** View detailed information about each event.
 - **User Profile:** Keep track of events you've created and liked through your profile.
-- **Modern Tech Stack:** Developed using Node.js, React, Express, JavaScript, CSS, and MongoDB.
+
+## Technologies Used
+
+- JavaScript
+- CSS
+- Node.js
+- React
+- Express
+- MongoDB
 
 ## Installation
 
@@ -34,13 +46,3 @@ Mordor Mingle is a web application that provides a platform for users to explore
 2. In a separate terminal, navigate to the `client` directory: `cd client`
 3. Start the client: `npm start`
 4. Access the application in your web browser at: `http://localhost:3000`
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m "Add your feature"`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a pull request.
