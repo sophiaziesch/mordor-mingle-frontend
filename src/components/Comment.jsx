@@ -11,7 +11,7 @@ function Comment({ comment }) {
 
   return (
     <div className="comment">
-      <ProfileImage image={comment.userId.image} />
+      {/* <ProfileImage image={comment.userId.image} /> */}
       <h4>Posted By: {comment.userId.username}</h4>
       <h4>On: {formattedDate}</h4>
       <h4>Comment Content:</h4>
