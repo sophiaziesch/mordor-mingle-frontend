@@ -13,7 +13,11 @@ const LogoutButton = () => {
     authenticateUser();
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <button className="logout-button" onClick={handleLogout}>
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
