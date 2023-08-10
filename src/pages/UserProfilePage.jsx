@@ -1,74 +1,84 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import axios from "axios"
+import { useState, useEffect, useContext } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
-import { Image } from 'cloudinary-react';
+import { Image } from 'cloudinary-react'
+import { AuthContext } from "../contexts/Auth.context";
 
 const UserProfilePage = () => {
-    const { userId } = useParams()
-    const navigate = useNavigate()
-    const [user, setUser] = useState(null)
+  const { userId } = useParams()
+  const navigate = useNavigate()
+  const [fetchedUser, setFetchedtUser] = useState(null)
+  const { user } = useContext(AuthContext);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5005/api/auth/${userId}?populate=eventsCreated&populate=eventsLiked`)
-                if (response.status === 200) {
-                    setUser(response.data)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        } 
-        fetchUser()
-    }, [userId])
+  console.log("user on userprofilepage:", user)
 
-    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+  useEffect(() => {
+    const fetchUser = async () => {
+        const tokenStored = localStorage.getItem("authToken");
+        try {
+          const response = await axios.get(`http://localhost:5005/api/auth/${userId}`, {
+            headers: { authorization: `Bearer ${tokenStored}` },
+        })
+          if (response.status === 200) {
+            console.log("user response", response.data)
+            setFetchedtUser(response.data)
+          } else {
+            console.error("Invalid userId")
+          }
+        } catch (error) {
+          console.log(error);
+        }
+    }
+    fetchUser()
+  }, [userId, fetchedUser])
 
-    return user ? (
-        <div>
-            
-            <Image cloudName={cloudName} publicId={user.profileImage} height="150" crop="thumb" />
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
-            <h1>Welcome, {user.username}!</h1>
-            
-            <h3>{user.email}</h3>
-            <h3>Events Liked:</h3>
-            {user.eventsCreated && user.eventsCreated.length > 0 ? (
-                <ul>
-                    {user.eventsCreated.map((event) => (
-                        <li key={event._id}>
-                            <h4>{event.title}</h4>
-                            <p>{event.location}</p>
-                            <p>{event.date}</p>
-                        </li>
-                    ))}
-                </ul>
-                ) : (
-                    <p>No events created yet.</p>
-                )}
-            <h3>Events Liked:</h3>
-            {user.eventsLiked && user.eventsLiked.length > 0 ? (
-                <ul>
-                    {user.eventsLiked.map((event) => (
-                        <li key={event._id}>
-                            <h4>{event.title}</h4>
-                            <p>{event.description}</p>
-                            <p>{event.location}</p>
-                            <p>{event.date}</p>
-                        </li>
-                    ))}
-                </ul>
-                ) : (
-                    <p>No events liked yet.</p>
-                )}
-            <h3>{user.race}</h3>
+  return fetchedUser ? (
+    <div>
+      <Image cloudName={cloudName} publicId={fetchedUser.profileImage} height="150" crop="thumb" />
 
-            <button onClick={() => navigate(`/${userId}/update`)}>Update</button>
+      <h1>Welcome, {fetchedUser.username}!</h1>
 
-        </div>
-    ) : (
-        <h1>Loading...</h1>
-    )
-}
+      <h3>{fetchedUser.race}</h3>
+
+      <h3>{fetchedUser.email}</h3>
+      <h3>Events Created:</h3>
+      {fetchedUser.eventsCreated && fetchedUser.eventsCreated.length > 0 ? (
+        <ul>
+          {fetchedUser.eventsCreated.map((event) => (
+            <li key={event._id}>
+              <h4>{event.title}</h4>
+              <p>{event.description}</p>
+              <p>{event.location}</p>
+              <p>{event.date}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No events created yet.</p>
+      )}
+      <h3>Events Liked:</h3>
+      {fetchedUser.eventsLiked && fetchedUser.eventsLiked.length > 0 ? (
+        <ul>
+          {fetchedUser.eventsLiked.map((event) => (
+            <li key={event._id}>
+              <h4>{event.title}</h4>
+              <p>{event.description}</p>
+              <p>{event.location}</p>
+              <p>{event.date}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No events liked yet.</p>
+      )}
+
+      <button onClick={() => navigate(`/${userId}/update`)}>Update</button>
+    </div>
+  ) : (
+    <h1>Loading...</h1>
+  );
+};
 
 export default UserProfilePage;
