@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/Auth.context";
 
 const NavBar = () => {
+  const { isLoggedIn, user } = useContext(AuthContext);
   return (
     <>
       <nav className="navbar">
@@ -20,6 +23,7 @@ const NavBar = () => {
             <li>
               <Link to="/events/new">New Event</Link>
             </li>
+            <li>{isLoggedIn && <Link to={`/${user._id}`}>Profile</Link>}</li>
             <li>
               <LogoutButton />
             </li>

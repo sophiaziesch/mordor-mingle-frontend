@@ -1,42 +1,50 @@
-import axios from "axios"
-import { useState, useEffect, useContext } from "react"
-import { useParams, useNavigate } from 'react-router-dom'
-import { Image } from 'cloudinary-react'
+import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Image } from "cloudinary-react";
 import { AuthContext } from "../contexts/Auth.context";
 
 const UserProfilePage = () => {
-  const { userId } = useParams()
-  const navigate = useNavigate()
-  const [fetchedUser, setFetchedtUser] = useState(null)
+  const { userId } = useParams();
+  const navigate = useNavigate();
+  const [fetchedUser, setFetchedtUser] = useState(null);
   const { user } = useContext(AuthContext);
 
-  console.log("user on userprofilepage:", user)
+  console.log("user on userprofilepage:", user);
 
   useEffect(() => {
     const fetchUser = async () => {
-        const tokenStored = localStorage.getItem("authToken");
-        try {
-          const response = await axios.get(`http://localhost:5005/api/auth/${userId}`, {
+      const tokenStored = localStorage.getItem("authToken");
+      try {
+        const response = await axios.get(
+          `http://localhost:5005/api/auth/${userId}`,
+          {
             headers: { authorization: `Bearer ${tokenStored}` },
-        })
-          if (response.status === 200) {
-            console.log("user response", response.data)
-            setFetchedtUser(response.data)
-          } else {
-            console.error("Invalid userId")
           }
-        } catch (error) {
-          console.log(error);
+        );
+        if (response.status === 200) {
+          console.log("user response", response.data);
+          setFetchedtUser(response.data);
+        } else {
+          console.error("Invalid userId");
         }
-    }
-    fetchUser()
-  }, [userId, fetchedUser])
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
   return fetchedUser ? (
     <div>
-      <Image cloudName={cloudName} publicId={fetchedUser.profileImage} height="150" crop="thumb" />
+      <Image
+        cloudName={cloudName}
+        publicId={fetchedUser.profileImage}
+        height="150"
+        crop="thumb"
+      />
 
       <h1>Welcome, {fetchedUser.username}!</h1>
 
