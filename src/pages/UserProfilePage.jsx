@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Image } from "cloudinary-react";
+/* import { Image } from "cloudinary-react"; */
 import { AuthContext } from "../contexts/Auth.context";
 import { API_URL } from "../config/config.index";
 
@@ -33,17 +33,18 @@ const UserProfilePage = () => {
     fetchUser();
   }, []);
 
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+	/* const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME; */
 
-  return fetchedUser ? (
-    <div className="events-container">
-      <div className="individual-event-profile">
-        {/* <Image
-          cloudName={cloudName}
-          publicId={fetchedUser.profileImage}
-          height="150"
-          crop="thumb"
-        /> */}
+	return fetchedUser ? (
+		<div>
+			{/* <Image
+				cloudName={cloudName}
+				publicId={fetchedUser.profileImage}
+				height="150"
+				crop="thumb"
+  /> */}
+      
+      <img src={fetchedUser.profileImage} alt="fetchedUser.username" width="200" />
 
         <h1>Welcome, {fetchedUser.username}!</h1>
 
