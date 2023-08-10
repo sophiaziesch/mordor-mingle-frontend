@@ -1,43 +1,54 @@
 import { useState, useEffect } from "react";
-import { CloudinaryContext, Image } from "cloudinary-react";
+/* import { CloudinaryContext, Image } from "cloudinary-react"; */
+import uploadImage from "../api/service"
 
 const UserForm = ({ onSubmit, user }) => {
   const [username, setUsername] = useState(user?.username || "");
   const [email, setEmail] = useState(
-    (typeof user !== "undefined" && user.email) || ""
-  );
-  /* const [priorXp, setPriorXp] = useState(student?.priorXp.join(' ') || '') */
+    (typeof user !== "undefined" && user.email) || "");
   const [selectedRace, setSelectedRace] = useState("");
   const [race, setRace] = useState([]);
-  const [profileImage, setProfileImage] = useState(
-    user?.profileImage ||
-      `https://res.cloudinary.com/${
-        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-      }/image/upload/v1691446459/Screenshot_2023-08-08_at_00.13.58_vuv4vy.png`
-  );
+  const [profileImage, setProfileImage] = useState(""); 
+
+
+  const handleImageUpload = (e) => {
+
+    console.log("image upload", e)
+    const file = e.target.files[0];
+  console.log("file", file)
+    if (file) {
+      const formData = new FormData();
+      formData.append("profileImage", file);
+  
+        uploadImage(formData)
+        .then((response) => {
+          setProfileImage(response.fileUrl);
+        })
+        .catch((err) => console.log("Error while uploading the file: ", err));
+    }
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit({ username, email, race: selectedRace, profileImage });
-  };
-  const handleImageUpload = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append(
-      "upload_preset",
-      import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
-    );
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${
-        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-      }/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const data = await response.json();
-    setProfileImage(data.secure_url);
-  };
+    
+    service
+      .uploadImage({ title, description, profileImage })
+      .then(res => {
+ 
+        // Reset the form
+        setTitle("");
+        setDescription("");
+        setProfileImage("");
+      
+        // navigate to another page
+        navigate("/");
+      })
+      .catch(err => console.log("Error while adding the new profile image: ", err));
+
+  }
+
+
   useEffect(() => {
     const raceOptions = [
       "Dwarf",
@@ -52,22 +63,25 @@ const UserForm = ({ onSubmit, user }) => {
     ];
     setRace(raceOptions);
   }, []);
+  {/* 
   <CloudinaryContext cloudName="dw2f2da86">
     <Image publicId={profileImage} width="150" crop="thumb" />
   </CloudinaryContext>;
+  */}
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <input
           type="file"
+          name="image"
           accept="image/jpeg, image/png"
-          onChange={(e) => handleImageUpload(e.target.files[0])}
+          onChange={(e) => handleImageUpload(e)}
         />
-        <CloudinaryContext
+        {/*<CloudinaryContext
           cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
         >
           <Image publicId={profileImage} height="150" crop="thumb" />
-        </CloudinaryContext>
+  </CloudinaryContext> */}
         <input
           type="text"
           value={username}
