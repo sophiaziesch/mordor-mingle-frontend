@@ -32,13 +32,12 @@ const UserForm = ({ onSubmit, user }) => {
     event.preventDefault();
     onSubmit({ username, email, race: selectedRace, profileImage });
     
-    service
-      .uploadImage({ title, description, profileImage })
+    
+      uploadImage({ profileImage })
       .then(res => {
  
         // Reset the form
-        setTitle("");
-        setDescription("");
+      
         setProfileImage("");
       
         // navigate to another page
