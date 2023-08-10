@@ -13,6 +13,10 @@ const EventDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState("");
 
+  const originalDate = new Date(event.date);
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  const formattedDate = originalDate.toLocaleDateString("en-US", options);
+
   const fetchOneEvent = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/events/${eventId}`);
@@ -53,7 +57,7 @@ const EventDetailsPage = () => {
           <div className="individual-event">
             <h1>{event.title}</h1>
             <h3>Event Location:</h3> <h4>{event.location} </h4>
-            <h3>Event Date:</h3> <h4>{event.date} </h4>
+            <h3>Event Date:</h3> <h4>{formattedDate} </h4>
             <h3>Event Description:</h3>
             <h4>{event.description}</h4>
             <h3>Created by:</h3>
