@@ -38,51 +38,58 @@ const UserProfilePage = () => {
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
   return fetchedUser ? (
-    <div>
-      <Image
-        cloudName={cloudName}
-        publicId={fetchedUser.profileImage}
-        height="150"
-        crop="thumb"
-      />
+    <div className="events-container">
+      <div className="individual-event-profile">
+        <Image
+          cloudName={cloudName}
+          publicId={fetchedUser.profileImage}
+          height="150"
+          crop="thumb"
+        />
 
-      <h1>Welcome, {fetchedUser.username}!</h1>
+        <h1>Welcome, {fetchedUser.username}!</h1>
 
-      <h3>{fetchedUser.race}</h3>
+        <h3>Race: {fetchedUser.race}</h3>
 
-      <h3>{fetchedUser.email}</h3>
-      <h3>Events Created:</h3>
-      {fetchedUser.eventsCreated && fetchedUser.eventsCreated.length > 0 ? (
-        <ul>
-          {fetchedUser.eventsCreated.map((event) => (
-            <li key={event._id}>
-              <h4>{event.title}</h4>
-              <p>{event.description}</p>
-              <p>{event.location}</p>
-              <p>{event.date}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No events created yet.</p>
-      )}
-      <h3>Events Liked:</h3>
-      {fetchedUser.eventsLiked && fetchedUser.eventsLiked.length > 0 ? (
-        <ul>
-          {fetchedUser.eventsLiked.map((event) => (
-            <li key={event._id}>
-              <h4>{event.title}</h4>
-              <p>{event.description}</p>
-              <p>{event.location}</p>
-              <p>{event.date}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No events liked yet.</p>
-      )}
+        <h3>Email: {fetchedUser.email}</h3>
+        <h3>Events Created:</h3>
+        {fetchedUser.eventsCreated && fetchedUser.eventsCreated.length > 0 ? (
+          <ul>
+            {fetchedUser.eventsCreated.map((event) => (
+              <li key={event._id}>
+                <h4>{event.title}</h4>
+                <p>{event.description}</p>
+                <p>{event.location}</p>
+                <p>{event.date}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No events created yet.</p>
+        )}
+        <h3>Events Liked:</h3>
+        {fetchedUser.eventsLiked && fetchedUser.eventsLiked.length > 0 ? (
+          <ul>
+            {fetchedUser.eventsLiked.map((event) => (
+              <li key={event._id}>
+                <h4>{event.title}</h4>
+                <p>{event.description}</p>
+                <p>{event.location}</p>
+                <p>{event.date}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No events liked yet.</p>
+        )}
 
-      <button onClick={() => navigate(`/${userId}/update`)}>Update</button>
+        <button
+          className="button"
+          onClick={() => navigate(`/${userId}/update`)}
+        >
+          Update
+        </button>
+      </div>
     </div>
   ) : (
     <h1>Loading...</h1>

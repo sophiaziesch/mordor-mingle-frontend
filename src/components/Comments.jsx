@@ -8,7 +8,10 @@ const Comments = ({ comments, setComments }) => {
       {comments.map((comment) => {
         return (
           <div key={comment._id}>
-            <Comment comment={comment} />
+            <h4>
+              {" "}
+              <Comment comment={comment} />
+            </h4>
           </div>
         );
       })}

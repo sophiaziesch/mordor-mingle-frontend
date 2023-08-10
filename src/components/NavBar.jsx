@@ -8,22 +8,39 @@ const NavBar = () => {
   return (
     <>
       <nav className="navbar">
-        <img className="logo" src="../src/assets/Logo-white.png" alt="logo" />
+        <Link to="/events">
+          <img className="logo" src="../src/assets/Logo-white.png" alt="logo" />
+        </Link>
+
         <ul>
           <div className="links">
             <li>
-              <Link to="/signup">Signup</Link>
+              <Link to="/signup">
+                <h4>Signup</h4>
+              </Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                <h4>Login</h4>
+              </Link>
             </li>
             <li>
-              <Link to="/events">Events</Link>
+              <Link to="/events">
+                <h4>Events</h4>
+              </Link>
             </li>
             <li>
-              <Link to="/events/new">New Event</Link>
+              <Link to="/events/new">
+                <h4>New Event</h4>
+              </Link>
             </li>
-            <li>{isLoggedIn && <Link to={`/${user._id}`}>Profile</Link>}</li>
+            <li>
+              {isLoggedIn && (
+                <Link to={`/${user._id}`}>
+                  <h4>Profile</h4>
+                </Link>
+              )}
+            </li>
             <li>
               <LogoutButton />
             </li>

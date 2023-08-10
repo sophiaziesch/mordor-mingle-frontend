@@ -23,22 +23,24 @@ const EventsPage = () => {
   }, []);
 
   return events ? (
-    <div className="events-container">
-      <h1>Events Page </h1>
-      {events.map((oneEvent) => {
-        return (
-          <div className="individual-event" key={oneEvent._id}>
-            <Link to={`/events/${oneEvent._id}`}>
-              <h2>{oneEvent.title}</h2>
-              <h3>Event Description:</h3>
-              <h4>{oneEvent.description}</h4>
-              <h3>Event Date:</h3> <h4>{oneEvent.date} </h4>
-              <h3>Event Location:</h3> <h4>{oneEvent.location} </h4>
-            </Link>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <h1 className="events-page-h1">Events Page </h1>
+      <div className="events-container">
+        {events.map((oneEvent) => {
+          return (
+            <div className="individual-event" key={oneEvent._id}>
+              <Link to={`/events/${oneEvent._id}`}>
+                <h2>{oneEvent.title}</h2>
+                <h3>Event Description:</h3>
+                <h4>{oneEvent.description}</h4>
+                <h3>Event Date:</h3> <h4>{oneEvent.date} </h4>
+                <h3>Event Location:</h3> <h4>{oneEvent.location} </h4>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </>
   ) : (
     <h1> Loading ...</h1>
   );
