@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config/config.index";
 
 const UpdateEvent = () => {
 	const navigate = useNavigate();
@@ -14,9 +15,7 @@ const UpdateEvent = () => {
 
 	const fetchEvents = async () => {
 		try {
-			const response = await fetch(
-				`http://localhost:5005/api/events/${eventId}`
-			); //I call my API to get all the students with the fetch
+			const response = await fetch(`${API_URL}/api/events/${eventId}`); //I call my API to get all the students with the fetch
 			if (response.status === 200) {
 				const parsedEvents = await response.json(); //If the response is successfull then I get the info from response.json() --> from the back end
 				setTitle(parsedEvents.title); //Once I get the info from the back end I use it in my
@@ -40,16 +39,13 @@ const UpdateEvent = () => {
 		console.log(updatedEvent);
 
 		try {
-			const response = await fetch(
-				`http://localhost:5005/api/events/update/${eventId}`,
-				{
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(updatedEvent),
-				}
-			);
+			const response = await fetch(`${API_URL}/api/events/update/${eventId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(updatedEvent),
+			});
 			const parsed = await response.json(); //We are posting our data (called response) into our API using a fetch with a method 'POST'. We are saving the data in a variable named parsed that is going to await the response from our server
 			navigate(`/events/${parsed._id}`);
 		} catch (error) {
