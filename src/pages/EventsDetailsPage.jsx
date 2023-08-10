@@ -70,7 +70,7 @@ const EventDetailsPage = () => {
             <button className="button" type="button" onClick={handleDelete}>
               Erase this event
             </button>
-            <Link to="/events/:eventId/update">
+            <Link to={`/events/${eventId}/update`}>
               <button className="button" type="button">
                 Update Event
               </button>
