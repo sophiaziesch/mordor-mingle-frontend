@@ -9,7 +9,7 @@ const NewEvent = () => {
 	const [description, setDescription] = useState("");
 	const [date, setDate] = useState("");
 
-	const [selectedLocation, setSelectedLocation] = useState("");
+	const [selectedLocation, setSelectedLocation] = useState("Edoras");
 	const [locationOptions, setLocationOptions] = useState([]);
 	const [userId, setUserId] = useState(""); // Add userName state
 

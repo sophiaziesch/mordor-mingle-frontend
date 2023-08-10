@@ -66,6 +66,7 @@ const EventDetailsPage = () => {
 							comments={comments}
 							setComments={setComments}
 							eventId={eventId}
+							fetchOneEvent={fetchOneEvent}
 						/>
 						<button className="button" type="button" onClick={handleDelete}>
 							Erase this event

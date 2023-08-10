@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../config/config.index";
 
-const NewComment = ({ comments, setComments }) => {
+const NewComment = ({ comments, setComments, fetchOneEvent }) => {
 	/* Setting states, getting token from local machine */
 	const [commentText, setCommentText] = useState("");
 	const { eventId } = useParams();
@@ -25,7 +25,8 @@ const NewComment = ({ comments, setComments }) => {
 			//console.log(response);
 			if (response.status === 201) {
 				/* making shallow copy of previous comments and adding newly created comment to comments array of event */
-				setComments([...comments, response.data]);
+				//setComments([...comments, response.data]);
+				fetchOneEvent();
 				setCommentText("");
 				//console.log("NewComment response:", response);
 			}

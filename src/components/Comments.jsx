@@ -1,7 +1,7 @@
 import Comment from "../components/Comment";
 import NewComment from "./NewComment";
 
-const Comments = ({ comments, setComments }) => {
+const Comments = ({ comments, setComments, fetchOneEvent }) => {
 	return (
 		<div className="comments">
 			<h3>Comments</h3>
@@ -12,7 +12,11 @@ const Comments = ({ comments, setComments }) => {
 					</div>
 				);
 			})}
-			<NewComment comments={comments} setComments={setComments} />
+			<NewComment
+				comments={comments}
+				setComments={setComments}
+				fetchOneEvent={fetchOneEvent}
+			/>
 		</div>
 	);
 };
