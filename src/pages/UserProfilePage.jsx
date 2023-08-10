@@ -89,7 +89,6 @@ const UserProfilePage = () => {
           Update
         </button>
       </div>
-    </div>
   ) : (
     <h1>Loading...</h1>
   );
