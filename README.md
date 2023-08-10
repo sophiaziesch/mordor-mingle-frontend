@@ -16,6 +16,12 @@ https://mordor-mingle.netlify.app/
 - **Event Comments:** Engage with other users by leaving comments on events.
 - **Event Details:** View detailed information about each event.
 - **User Profile:** Keep track of events you've created and liked through your profile.
+- **Responsive Design:** Use Mondor Mingle on your desktop or mobile.
+
+## Backlog
+
+- Implement user profile image
+- Add responsive design for tablets
 
 ## Technologies Used
 
