@@ -40,12 +40,12 @@ const UserProfilePage = () => {
   return fetchedUser ? (
     <div className="events-container">
       <div className="individual-event-profile">
-        <Image
+        {/* <Image
           cloudName={cloudName}
           publicId={fetchedUser.profileImage}
           height="150"
           crop="thumb"
-        />
+        /> */}
 
         <h1>Welcome, {fetchedUser.username}!</h1>
 
