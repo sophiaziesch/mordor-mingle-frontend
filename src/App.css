@@ -186,6 +186,7 @@ table {
 		flex-direction: column;
 		gap: 2rem;
 		align-items: center;
+		padding: 20px;
 	}
 
 	.individual-event {
@@ -213,6 +214,23 @@ table {
 		padding: 10px 20px;
 		color: black;
 	}
+
+	/* USER PROFILE STYLES */
+}
+.profile-container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+	padding: 20px;
+	background-color: rgba(131, 32, 14, 0.847);
+	width: 80vw;
+	height: auto;
+	border: 1px white solid;
+	border-radius: 20px;
+	padding: 2rem 2rem;
+	text-align: center;
+	margin: 50px auto;
 }
 
 /* TABLETS */
@@ -389,6 +407,22 @@ table {
 		text-align: center;
 		padding: 10px 20px;
 		color: black;
+	}
+
+	.profile-container {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		align-items: center;
+		padding: 20px;
+		background-color: rgba(131, 32, 14, 0.847);
+		width: 45vw;
+		height: auto;
+		border: 1px white solid;
+		border-radius: 20px;
+		padding: 2rem 2rem;
+		text-align: center;
+		margin: 50px auto;
 	}
 
 	/* PROFILE STYLES */
