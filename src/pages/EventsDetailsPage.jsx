@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Comments from "../components/Comments";
 import { API_URL } from "../config/config.index";
 
@@ -70,6 +70,11 @@ const EventDetailsPage = () => {
             <button className="button" type="button" onClick={handleDelete}>
               Erase this event
             </button>
+            <Link to="/events/:eventId/update">
+              <button className="button" type="button">
+                Update Event
+              </button>
+            </Link>
           </div>
         </div>
       ) : (
