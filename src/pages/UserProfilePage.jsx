@@ -1,7 +1,7 @@
+//WORKING
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Image } from "cloudinary-react";
 import { AuthContext } from "../contexts/Auth.context";
 
 const UserProfilePage = () => {
@@ -35,8 +35,6 @@ const UserProfilePage = () => {
     fetchUser();
   }, []);
 
-  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-
   return fetchedUser ? (
     <div className="events-container">
       <div className="individual-event-profile">
@@ -46,6 +44,11 @@ const UserProfilePage = () => {
           height="150"
           crop="thumb"
         /> */}
+        <img
+          src={fetchedUser.profileImage}
+          alt={fetchedUser.username}
+          width="200"
+        />
 
         <h1>Welcome, {fetchedUser.username}!</h1>
 
